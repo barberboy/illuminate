@@ -11,6 +11,7 @@
     "test": "test"
   },
   "scripts": {
+    "prepublish": "bin/illuminate < illuminate.js > README.md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benjamin Barber",
