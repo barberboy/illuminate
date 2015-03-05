@@ -95,7 +95,7 @@ var kebabcase = require('lodash.kebabcase');
  * - `pedantic`: Conform to obscure parts of markdown.pl as much as possible. Default is `false`.
  * - `sanitize`:Sanitize the output. Ignore any HTML that has been input. Default is `false`.
  * - `smartLists`: Use smarter list behavior than the original markdown. Default is `false`.
- * - `smartypants`: Use "smart" typograhic punctuation for things like quotes and dashes. Default is `false`.
+ * - `smartypants`: Use "smart" typographic punctuation for things like quotes and dashes. Default is `false`.
  * - `syntax`: Enable syntax highlighting using highlight.js during Markdown->HTML conversion. Default is `false`.
  * - `xhtml`: Render XHTML compatible output. Default is `false`.
  * 

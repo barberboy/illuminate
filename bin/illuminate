@@ -18,7 +18,7 @@ program
   .option('--pedantic', 'Conform to obscure parts of markdown.pl as much as possible. Don\'t fix any of the original Markdown bugs or poor behavior.')
   .option('--sanitize', 'Sanitize the output. Ignore any HTML that has been input.')
   .option('--no-smartLists', 'Use original Markdown behavior for lists.')
-  .option('--smartypants', 'Use “smart” typograhic punctuation for things like quotes and dashes.')
+  .option('--smartypants', 'Use “smart” typographic punctuation for things like quotes and dashes.')
   .option('--syntax', 'Enable syntax highlighting using highlight.js.')
   .option('--xhtml', 'Render XHTML compatible output.');
 
