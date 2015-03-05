@@ -174,7 +174,7 @@ function illuminate(source, options) {
  * illuminate.Renderer
  * ===================
  * By default, illuminate uses a custom Renderer which inherits from
- * [markdown.Renderer] and generates unique IDs for headings.
+ * [marked.Renderer] and generates unique IDs for headings.
  * 
  * You can override this renderer by setting `options.renderer`, but if you'd
  * like to maintain the unique ID behavior, you can do something like:
@@ -188,9 +188,9 @@ function illuminate(source, options) {
  * 
  * See Also:
  * 
- * - [markdown.Renderer]
+ * - [marked.Renderer]
  * 
- * [markdown.Renderer]: https://github.com/chjj/marked#renderer
+ * [marked.Renderer]: https://github.com/chjj/marked#renderer
  */
 function Renderer() {
     markdown.Renderer.apply(this, arguments);
