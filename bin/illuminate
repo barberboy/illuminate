@@ -5,7 +5,6 @@
 var program = require('commander');
 var pkg = require('../package');
 var illuminate = require('../illuminate');
-var pick = require('lodash.pick');
 
 // options
 
