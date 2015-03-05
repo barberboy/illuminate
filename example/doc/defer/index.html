@@ -1,0 +1,118 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>defer</title>
+<link rel="stylesheet" href="https://cdn.rawgit.com/barberboy/open-sans/2011-02-02/open-sans.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<style>
+  body {
+    font: 16px/1.4 Open Sans, Helvetica Neue, Helvetica, sans-serif;
+    font-family: 'Open Sans';
+    max-width: 50em;
+    margin: auto;
+  }
+  h1 {
+    margin-top: 1.5em;
+    border-bottom: 1px solid #ddd;
+  }
+  pre,
+  code {
+    background-color: #f3f3f3;
+    padding: 2px;
+  }
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+  a {
+    color: #39d;
+    text-decoration: none;
+  }
+</style>
+<main role="main">
+    <h1 id="defer">defer</h1>
+<p>Utilities to lazily load DOM elements.</p>
+<p>  Version: 1.1.1<br>  Homepage: <a href="https://github.com/barberboy/defer">https://github.com/barberboy/defer</a>  </p>
+<h2 id="install">Install</h2>
+<pre><code>npm <span class="hljs-keyword">install</span> defer
+</code></pre><h2 id="methods">Methods</h2>
+<ul>
+<li><a href="#defer-scan">defer.scan</a></li>
+<li><a href="#defer-load">defer.load</a></li>
+</ul>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li><a href="https://github.com/barberboy/request">request v1.0.0</a></li>
+</ul>
+<h1 id="defer-scan">defer.scan</h1>
+<p>The <strong>defer.scan()</strong> method scans the document for deferred elements
+and loads them automatically.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code>defer.scan([<span class="hljs-link_label">element</span>][<span class="hljs-link_reference">, callback</span>])
+</code></pre><h2 id="parameters">Parameters</h2>
+<ul>
+<li><p><code>element</code>: Optional. Specifies the root <a href="https://developer.mozilla.org/en-US/docs/Web/API/element">Element</a> to scan. If not
+ provided, the entire document will be scanned.</p>
+</li>
+<li><p><code>callback(el)</code>: Optional. The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a> to be called after each
+ deferred element has been loaded.</p>
+<p> When <code>callback</code> is invoked, its <code>this</code> binding is set to the
+ <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> object that made the request, and the first argument,
+ <code>el</code>, refers to the deferred <a href="https://developer.mozilla.org/en-US/docs/Web/API/element">Element</a>.</p>
+</li>
+</ul>
+<h2 id="description">Description</h2>
+<p><code>defer.scan(element)</code> checks <code>element</code> for children that have the <code>defer</code>
+class name and a <code>data-src</code> attribute. If <code>element</code> is not provided, scan
+the entire <code>document</code>. An example of matching HTML would be something
+like:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"defer"</span> <span class="hljs-attribute">data-src</span>=<span class="hljs-value">"partial.html"</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- fallback content if request fails --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+<p>defer.scan() is automatically called when defer.js is loaded,
+though you can disable this by setting:</p>
+<pre><code class="lang-js"><span class="hljs-built_in">window</span>.defer_config = {<span class="hljs-attribute">autoscan</span>: <span class="hljs-literal">false</span>};
+</code></pre>
+<p><em>before</em> loading the defer.js library.</p>
+<p><code>defer.scan</code> is called on the deferred elements after they are
+loaded, so you can safely use use .defer inside deferred HTML.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></li>
+</ul>
+<h1 id="defer-load">defer.load</h1>
+<p>The <strong>defer.load(element, url)</strong> method fetches text from the server and
+injects it into the passed element.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code class="lang-js">defer.load(element[<span class="hljs-link_label">, url</span>][<span class="hljs-link_reference">, callback</span>])
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<ul>
+<li><code>element</code>: The DOM <a href="https://developer.mozilla.org/en-US/docs/Web/API/element">Element</a> to load the content into.</li>
+<li><code>url</code>    : Optional. A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype">String</a> specifying the URL of the content to
+ load. If not provided, the value of the <code>data-src</code> attribute will be
+ used.</li>
+<li><p><code>callback(el)</code>: Optional. A callback <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a> that will be called
+ after each deferred element has been loaded.</p>
+<p> When <code>callback</code> is invoked, its <code>this</code> binding is set to the
+ <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> object that made the request, and the first argument,
+ <code>el</code>, refers to the deferred <a href="https://developer.mozilla.org/en-US/docs/Web/API/element">Element</a>.</p>
+</li>
+</ul>
+<h2 id="description">Description</h2>
+<p><code>defer.load(element, url)</code> fetches the contents of <code>url</code> and injects the
+returned text into <code>element</code>.</p>
+<p>If <code>url</code> is not provided, defer will look for the <code>data-src</code> attribute
+and use its value as the url.</p>
+<h2 id="examples">Examples</h2>
+<pre><code><span class="hljs-regexp">//</span> Fetch <span class="hljs-string">"/sidebar.html"</span> <span class="hljs-keyword">and</span> load its contents into
+<span class="hljs-regexp">//</span> the element <span class="hljs-reserved">with</span> the ID <span class="hljs-keyword">of</span> <span class="hljs-string">"sidebar"</span>.
+<span class="hljs-reserved">var</span> sidebar = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'sidebar'</span>);
+defer.load(sidebar, <span class="hljs-string">'/sidebar.html'</span>);
+</code></pre><h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></li>
+</ul>
+
+</main>

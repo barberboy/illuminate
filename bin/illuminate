@@ -1,0 +1,79 @@
+#!/usr/bin/env node
+
+// dependencies.
+
+var program = require('commander');
+var pkg = require('../package');
+var illuminate = require('../illuminate');
+var pick = require('lodash.pick');
+
+// options
+
+program
+  .version(pkg.version)
+  .option('--html', 'Convert Markdown to HTML.')
+  .option('--json', 'Output as a JSON object with a title and body.')
+  .option('--no-gfm', 'Disable Github flavored markdown.')
+  .option('--no-tables', 'Disable GFM tables.')
+  .option('--breaks', 'Enable GFM line breaks. This option requires gfm to be enabled.')
+  .option('--pedantic', 'Conform to obscure parts of markdown.pl as much as possible. Don\'t fix any of the original Markdown bugs or poor behavior.')
+  .option('--sanitize', 'Sanitize the output. Ignore any HTML that has been input.')
+  .option('--no-smartLists', 'Use original Markdown behavior for lists.')
+  .option('--smartypants', 'Use “smart” typograhic punctuation for things like quotes and dashes.')
+  .option('--syntax', 'Enable syntax highlighting using highlight.js.')
+  .option('--xhtml', 'Render XHTML compatible output.');
+
+
+// examples
+
+program.on('--help', function() {
+  console.log('  Examples:');
+  console.log('');
+  console.log('    # Generate README.md from source code comments');
+  console.log('    $ illuminate < myfile.js > README.md');
+  console.log('');
+  console.log('    # Convert to HTML');
+  console.log('    $ illuminate --html < myfile.js > myfile.html');
+  console.log('');
+  console.log('    # Generate .json to send to Mustache template');
+  console.log('    $ illuminate --json --html < myfile.js | mustache - template.mustache');
+  console.log('');
+});
+
+// parse argv
+
+program.parse(process.argv);
+
+// process stdin
+
+var buf = '';
+var stdin = process.stdin;
+stdin.setEncoding('utf8');
+stdin
+  .on('data', function(chunk) {
+    buf += chunk;
+  })
+  .on('end', function() {
+    // barf.
+    var options = {
+      html: program.html,
+      json: program.json,
+      gfm: program.gfm,
+      tables: program.tables,
+      breaks: program.breaks,
+      pedantic: program.pedantic,
+      sanitize: program.sanitize,
+      smartLists: program.smartLists,
+      smartypants: program.smartypants,
+      syntax: program.syntax,
+      xhtml: program.xhtml
+    };
+    var output = illuminate(buf, options);
+    if (program.json) {
+      process.stdout.write(JSON.stringify(output));
+    }
+    else {
+      process.stdout.write(output);
+    }
+  })
+  .resume();

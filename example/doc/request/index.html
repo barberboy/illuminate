@@ -1,0 +1,170 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>request</title>
+<link rel="stylesheet" href="https://cdn.rawgit.com/barberboy/open-sans/2011-02-02/open-sans.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<style>
+  body {
+    font: 16px/1.4 Open Sans, Helvetica Neue, Helvetica, sans-serif;
+    font-family: 'Open Sans';
+    max-width: 50em;
+    margin: auto;
+  }
+  h1 {
+    margin-top: 1.5em;
+    border-bottom: 1px solid #ddd;
+  }
+  pre,
+  code {
+    background-color: #f3f3f3;
+    padding: 2px;
+  }
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+  a {
+    color: #39d;
+    text-decoration: none;
+  }
+</style>
+<main role="main">
+    <h1 id="request">request</h1>
+<p>A simpler XHR API. The <code>request</code> library provides a simple API for fetching
+content using XMLHttpRequest.</p>
+<p>Version: 1.0.0<br>Homepage: <a href="https://github.com/barberboy/request">https://github.com/barberboy/request</a>  </p>
+<h2 id="install">Install</h2>
+<pre><code>npm <span class="hljs-keyword">install</span> request
+</code></pre><h2 id="methods">Methods</h2>
+<ul>
+<li><a href="#request-json">request.json</a></li>
+<li><a href="#request-jsonp">request.jsonp</a></li>
+<li><a href="#request-text">request.text</a></li>
+<li><a href="#request-html">request.html</a></li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a></li>
+<li><a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></li>
+</ul>
+<h1 id="request-json">request.json</h1>
+<p>The <strong>request.json()</strong> method fetches a JSON files and returns the
+parsed JSON object.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code>request.<span class="hljs-function"><span class="hljs-title">json</span><span class="hljs-params">(path, callback)</span></span>
+</code></pre><h2 id="parameters">Parameters</h2>
+<ul>
+<li><p><code>path</code>:  A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> containing a URL to the JSON file.</p>
+</li>
+<li><p><code>callback(obj)</code>: A callback <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a> to be called when the request
+ completes.</p>
+<p> When <code>callback</code> is invoked, its <code>this</code> binding is set to the
+ <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> object that made the request, and the first argument,
+ <code>obj</code>, is a JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer">Object</a> built from the parsed JSON.</p>
+</li>
+</ul>
+<h2 id="description">Description</h2>
+<p><code>request.json(path, callback)</code> fetches a .json file, parses it, and
+passes the resulting JavaScript object to <code>callback</code>.</p>
+<p>When <code>callback</code> is invoked, its <code>this</code> binding is set to the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> object that made the request, allowing you to check
+the status of the XHR request.</p>
+<h2 id="examples">Examples</h2>
+<pre><code>request.json(<span class="hljs-string">'/data.json'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+  <span class="hljs-comment">// Ensure a successful response</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.status === <span class="hljs-number">200</span>) {
+    <span class="hljs-comment">// Do something with `data`</span>
+  }
+});
+</code></pre><h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></li>
+</ul>
+<h1 id="request-jsonp">request.jsonp</h1>
+<p>The <strong>request.jsonp()</strong> method loads a <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a> script.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code>request.<span class="hljs-function"><span class="hljs-title">jsonp</span><span class="hljs-params">(path)</span></span>
+</code></pre><h2 id="parameters">Parameters</h2>
+<ul>
+<li><code>path</code>:  A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> containing a URL to the JSONP script.</li>
+</ul>
+<h2 id="description">Description</h2>
+<p><code>request.jsonp(path)</code> fetches loads a JSONP script into the document.</p>
+<h2 id="examples">Examples</h2>
+<pre><code><span class="hljs-title">request</span>.jsonp('/<span class="hljs-typedef"><span class="hljs-keyword">data</span>.js');</span>
+</code></pre><h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a></li>
+</ul>
+<h1 id="request-text">request.text</h1>
+<p>The <strong>request.text()</strong> method fetches text from the server and passes
+it to the callback function.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code>request.<span class="hljs-function"><span class="hljs-title">text</span><span class="hljs-params">(path, callback)</span></span>
+</code></pre><h2 id="parameters">Parameters</h2>
+<ul>
+<li><p><code>path</code>:  A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> containing a URL to the HTML file.</p>
+</li>
+<li><p><code>callback(response)</code>: A callback <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a> to be called when the request
+completes.</p>
+<p>When <code>callback</code> is invoked, its <code>this</code> binding is set to the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> object that made the request, and the first
+argument, <code>response</code>, is a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> containing the response text.</p>
+</li>
+</ul>
+<h2 id="description">Description</h2>
+<p><code>request.text(path, callback)</code> makes an XMLHttpRequest for data on
+the server, and passes the resonse to <code>callback</code>.</p>
+<p>When <code>callback</code> is invoked, its <code>this</code> binding is set to the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> object that made the request, allowing you to check
+the status of the XHR request.</p>
+<h2 id="examples">Examples</h2>
+<pre><code>request.html(<span class="hljs-string">'/footer.html'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(html)</span> </span>{
+  <span class="hljs-comment">// Ensure a successful response</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.status === <span class="hljs-number">200</span>) {
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'footer'</span>).innerHTML = html;
+  }
+});
+</code></pre><h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></li>
+</ul>
+<h1 id="request-html">request.html</h1>
+<p>The <strong>request.html()</strong> method fetches HTML content and passes it to
+the callback function.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code>request.<span class="hljs-function"><span class="hljs-title">html</span><span class="hljs-params">(path, callback)</span></span>
+</code></pre><h2 id="parameters">Parameters</h2>
+<ul>
+<li><p><code>path</code>:  A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> containing a URL to the HTML file.</p>
+</li>
+<li><p><code>callback(html)</code>: A callback <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a> to be called when the request
+ completes.</p>
+<p> When <code>callback</code> is invoked, its <code>this</code> binding is set to the
+ <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> object that made the request, and the first argument,
+ <code>html</code>, is a String containing the returned HTML.</p>
+</li>
+</ul>
+<h2 id="description">Description</h2>
+<p><code>request.html(path, callback)</code> fetches HTML content and
+passes it to <code>callback</code>. (Truthfully, it&#39;s just an alias to
+response.text().)</p>
+<p>When <code>callback</code> is invoked, its <code>this</code> binding is set to the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> object that made the request, allowing you to check
+the status of the XHR request.</p>
+<h2 id="examples">Examples</h2>
+<pre><code>request.html(<span class="hljs-string">'/footer.html'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(html)</span> </span>{
+  <span class="hljs-comment">// Ensure a successful response</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.status === <span class="hljs-number">200</span>) {
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'footer'</span>).innerHTML = html;
+  }
+});
+</code></pre><h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></li>
+</ul>
+
+</main>

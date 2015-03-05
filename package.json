@@ -1,0 +1,27 @@
+{
+  "name": "illuminate",
+  "version": "1.0.0",
+  "description": "Illuminate extracts Markdown from source code to build READMEs and API documentation.",
+  "main": "illuminate.js",
+  "bin": "./bin/illuminate",
+  "directories": {
+    "bin": "bin",
+    "example": "example",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.6.0",
+    "dox": "^0.6.1",
+    "highlight.js": "^8.4.0",
+    "inherits": "^2.0.1",
+    "lodash.assign": "^3.0.0",
+    "lodash.kebabcase": "^3.0.1",
+    "lodash.pick": "^3.0.0",
+    "marked": "^0.3.3"
+  }
+}
