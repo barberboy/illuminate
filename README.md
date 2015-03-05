@@ -13,8 +13,8 @@ Install from npm:
 
 Usage Examples
 --------------
-The illuminate(1) cli tool operates over stdio, extracting Markdown comments
-from a JavaScript source file:
+The illuminate(1) cli operates over stdio, extracting Markdown comments from
+a JavaScript source file:
 
 ```sh
 # Generate README.md from source code comments
@@ -110,11 +110,12 @@ like to maintain the unique ID behavior, you can do something like:
 See Also:
 
 - [markdown.Renderer]
-  [markdown.Renderer]: https://github.com/chjj/marked#renderer
+
+[markdown.Renderer]: https://github.com/chjj/marked#renderer
 
 License
 -------
-The MIT License (MIT)
+The MIT License (MIT)  
 Copyright © 2015 Benjamin Barber
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

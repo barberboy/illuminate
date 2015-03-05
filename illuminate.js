@@ -189,7 +189,8 @@ function illuminate(source, options) {
  * See Also:
  * 
  * - [markdown.Renderer]
- *   [markdown.Renderer]: https://github.com/chjj/marked#renderer
+ * 
+ * [markdown.Renderer]: https://github.com/chjj/marked#renderer
  */
 function Renderer() {
     markdown.Renderer.apply(this, arguments);
